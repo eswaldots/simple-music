@@ -34,11 +34,7 @@ function Pause(props) {
     </Svg>
   );
 }
-<<<<<<< HEAD
-export default function Float({ id = null, name, artist, img, mp3 }) {
-=======
 export default function Float({here, id = null, name, artist, img, mp3 }) {
->>>>>>> be28b31 (Fixing local laptop bug)
   const { percent, setPercent } = useContext(GlobalSong);
   const { total, setTotal } = useContext(GlobalSong);
   const router = useRouter();
@@ -49,11 +45,7 @@ export default function Float({here, id = null, name, artist, img, mp3 }) {
   // No ejecutar el useEffect al principio de la aplicación
   const firstRender = useRef(true);
   // Reproduce el sonido
-<<<<<<< HEAD
-  async function playSound(millis) {
-=======
   async function playSound() {
->>>>>>> be28b31 (Fixing local laptop bug)
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(mp3, {
       shouldPlay: isPlaying,
@@ -65,17 +57,11 @@ export default function Float({here, id = null, name, artist, img, mp3 }) {
     await sound.playAsync();
     sound.setOnPlaybackStatusUpdate(Playback);
   }
-<<<<<<< HEAD
-  const Playback = async (e) => {
-    setPercent(e.positionMillis);
-    setTotal(e.durationMillis);
-=======
   const {isFinished, setIsFinished} = useContext(GlobalSong);
   const Playback = async (e) => {
     setPercent(e.positionMillis);
     setTotal(e.durationMillis);
     setIsFinished(e.didJustFinish);
->>>>>>> be28b31 (Fixing local laptop bug)
   };
   async function pauseSound() {
     const time = await sound.getStatusAsync();
@@ -86,10 +72,6 @@ export default function Float({here, id = null, name, artist, img, mp3 }) {
   async function quitSound() {
     sound.unloadAsync();
     setRate(0);
-<<<<<<< HEAD
-    playSound();
-=======
->>>>>>> be28b31 (Fixing local laptop bug)
   }
   // Quita el sonido de la memoria
   useEffect(() => {
@@ -99,23 +81,12 @@ export default function Float({here, id = null, name, artist, img, mp3 }) {
           sound.unloadAsync();
         }
       : undefined;
-<<<<<<< HEAD
-  }, [sound]);
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-    } else {
-      quitSound();
-    }
-  }, [name]);
-=======
   }, [name]);
  useEffect(() => {
     if (sound) {
       quitSound();
       playSound();}
   }, [here]);
->>>>>>> be28b31 (Fixing local laptop bug)
   const { isPlaying, setIsPlaying } = useContext(GlobalSong);
   const changeState = () => {
     isPlaying

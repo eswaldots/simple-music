@@ -69,16 +69,11 @@ function Pause(props) {
   );
 }
 // Controles de la cancion
-<<<<<<< HEAD
-export default function Controls({ total, percent, PlaySong, PauseSong, NextSong, BackSong }) {
-  const router = useRouter()
-=======
 export default function Controls({ total, percent, PlaySong, PauseSong, QuitSong, setPosition }) {
   const router = useRouter()
   const {idSong, setIdSong} = useContext(GlobalSong);
   const [nextId, setNextId] = useState(0);
   const {rate, setRate} = useContext(GlobalSong);
->>>>>>> be28b31 (Fixing local laptop bug)
   // Estado de la cancion
   const { isPlaying, setIsPlaying } = useContext(GlobalSong);
   // Reproduce la cancion
@@ -92,14 +87,6 @@ export default function Controls({ total, percent, PlaySong, PauseSong, QuitSong
     setIsPlaying(() => false);
   };
   const NextSound = () => {
-<<<<<<< HEAD
-    NextSong();
-    setIsPlaying(() => true)
-  }
-  const BackSound = () => {
-    BackSong();
-  }
-=======
       QuitSong();
       console.warn(idSong);
       idSong + 1 < 3 ? router.replace(`(Next)/${idSong + 1}`) :
@@ -115,7 +102,6 @@ export default function Controls({ total, percent, PlaySong, PauseSong, QuitSong
   const {isFinished, setIsFinished} = useContext(GlobalSong);
 
   isFinished && (NextSound());
->>>>>>> be28b31 (Fixing local laptop bug)
   return (
     <>
       <Slider
@@ -126,15 +112,7 @@ export default function Controls({ total, percent, PlaySong, PauseSong, QuitSong
         thumbTintColor="#FFFFFF"
         value={percent}
         maximumValue={total}
-<<<<<<< HEAD
-=======
         onValueChange={value => setPosition(value)}
-        tapToSeek={true}
-        slideOnTap={true}
-        className="flex-auto flex-row w-full items-center justify-center bg-gray-300 drop-shadow-xl shadow-2xl max-h-2 gap-10 rounded-xl min-h-2"
-        step={1}
-        tapToSeek={true}
->>>>>>> be28b31 (Fixing local laptop bug)
         slideOnTap={true}
         className="flex-auto flex-row w-full items-center justify-center bg-gray-300 drop-shadow-xl shadow-2xl max-h-2 gap-10 rounded-xl min-h-2"
       ></Slider>

@@ -31,13 +31,8 @@ export default function Index({}) {
     async function playSound() {
       console.log("Loading Sound");
       const { sound } = await Audio.Sound.createAsync(mp3, {
-<<<<<<< HEAD
-        shouldPlay: isPlaying,
-        positionMillis: rate || 0,
-=======
         positionMillis: rate || 0,
         shouldPlay: isPlaying,
->>>>>>> be28b31 (Fixing local laptop bug)
       });
       setIsPlaying(true);
       setSound(sound);
@@ -46,14 +41,10 @@ export default function Index({}) {
       sound.setOnPlaybackStatusUpdate(Playback);
     }
     const [nextId, setNextId] = useState(0)
-<<<<<<< HEAD
-    const Playback = async (e) => {
-=======
   const {isFinished, setIsFinished} = useContext(GlobalSong);
     
     const Playback = async (e) => {
       setIsFinished(e.didJustFinish);
->>>>>>> be28b31 (Fixing local laptop bug)
       setPercent(e.positionMillis);
       setTotal(e.durationMillis);
     };
@@ -69,17 +60,10 @@ export default function Index({}) {
       setRate(() => rate.positionMillis);
     }
     async function nextSound() {
-<<<<<<< HEAD
-      setNextId(id)
-      nextId + 1 < 3 ? (setID(nextId + 1)) : (setID(0))
-      setIdSong(id)
-      quitSound()
-=======
       quitSound()
       setNextId(id + 1);
       nextId < 3 ? (setID(nextId)) : (setID(0))
       setIdSong(id)
->>>>>>> be28b31 (Fixing local laptop bug)
     }
     async function backSound() {
       quitSound()
@@ -92,9 +76,6 @@ export default function Index({}) {
       Playback(sound.getStatusAsync());
       }
     }, [Song]);
-<<<<<<< HEAD
-    useEffect(() => {
-=======
     /*useEffect(() => {
 >>>>>>> be28b31 (Fixing local laptop bug)
       return sound
@@ -126,7 +107,6 @@ export default function Index({}) {
     return (
       <>
         <View className="flex flex-col flex-1 m-8 gap-5 justify-center items-stretch">
->>>>>>> be28b31 (Fixing local laptop bug)
           <View className="flex flex-row flex-1 max-w-screen max-h-5 justify-center mt-4">
             <TouchableOpacity className="flex flex-row flex-1 max-h-2 shadow-2xl max-w-20 bg-black rounded-xl"></TouchableOpacity>
           </View>
@@ -136,14 +116,9 @@ export default function Index({}) {
             percent={percent}
             PlaySong={playSound}
             PauseSong={pauseSound}
-<<<<<<< HEAD
-            NextSong={nextSound}
-            BackSong={backSound}
-=======
             QuitSong={quitSound}
             setPosition={setPosition}
             isFinished={isFinished}
->>>>>>> be28b31 (Fixing local laptop bug)
           ></Controls>
         </View>
       </>
