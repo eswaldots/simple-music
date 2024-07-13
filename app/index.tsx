@@ -12,15 +12,9 @@ export default function Index() {
     // Redirigiendo a los usuarios al reproductor ([id])
     // Inicializando la importación
     const Songs = (Tracks)
-<<<<<<< HEAD
-    // Mappeandola
-    const Song = Tracks.find(Track => Track.id === idSong)
-    console.log(Song.id)
-=======
     const [here, setHere] = useState(0);
     // Mappeandola
     const Song = Tracks.find(Track => Track.id === idSong)
->>>>>>> be28b31 (Fixing local laptop bug)
     return (
         <View className='p-5 py-10 flex-1 flex flex-col max-w-screen max-h-screen bg-white'>
             <Text className='font-bold text-3xl mb-5'>Featured Songs</Text>
@@ -34,11 +28,7 @@ export default function Index() {
             </View>
             </TouchableOpacity>
     {Songs.map(Track => (
-<<<<<<< HEAD
-            <TouchableOpacity onPress={() => {setIdSong(Track.id) }} key={Track.id}>
-=======
             <TouchableOpacity onPress={() => {setIdSong(Track.id), setHere(here => here + 1) }} key={Track.id}>
->>>>>>> be28b31 (Fixing local laptop bug)
             <View className='flex flex-row items-center gap-5 m-2'>
             <Image className='max-h-16 rounded-xl max-w-16' source={Track.img}/>
             <View className='flex flex-col'>
@@ -48,11 +38,7 @@ export default function Index() {
             </View>
             </TouchableOpacity>))
             }
-<<<<<<< HEAD
-            <Float id={Song.id} name={Song.name} artist={Song.artist} img={Song.img} mp3={Song.mp3}></Float>
-=======
             <Float here={here} id={Song.id} name={Song.name} artist={Song.artist} img={Song.img} mp3={Song.mp3}></Float>
->>>>>>> be28b31 (Fixing local laptop bug)
             </View>
     )
 }
