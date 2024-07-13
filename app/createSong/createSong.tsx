@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import { View, Text } from "react-native";
-
-export default function createSong() {
-    return (
-        <View className='p-5 py-10 flex-1 flex flex-col max-w-screen max-h-screen bg-white'>
-            <Text className='font-bold text-3xl mb-5'>Add a new song</Text>
-            </View>
-=======
 import { View, Text, TextInput, Image, Dimensions, TouchableOpacity, ScrollView, SafeAreaView,FlatList   } from "react-native";
 import * as imagePicker from 'expo-image-picker';
 import {useState} from 'react';
@@ -86,6 +77,5 @@ export default function createSong() {
             <Text className='text-white font-bold'>Add</Text>
             </TouchableOpacity>     
             </ScrollView>
->>>>>>> be28b31 (Fixing local laptop bug)
     )
 }

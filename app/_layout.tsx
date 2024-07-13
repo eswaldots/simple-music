@@ -20,11 +20,7 @@ export default function RootLayout() {
   return (
     <>
       <GlobalProvider>
-<<<<<<< HEAD
-        <Stack initialRouteName="index" detachInactiveScreens={true} screenOptions={{ headerShown: false, }}>
-=======
         <Stack initialRouteName="createsong/createSong" detachInactiveScreens={false} screenOptions={{ headerShown: false, }}>
->>>>>>> be28b31 (Fixing local laptop bug)
         <Stack.Screen
             name="index"
             options={{
@@ -34,11 +30,7 @@ export default function RootLayout() {
               animationDuration: 400,
               presentation: 'modal',
               animation: 'slide_from_bottom',
-<<<<<<< HEAD
-              animationTypeForReplace: 'push'
-=======
               animationTypeForReplace: 'push',
->>>>>>> be28b31 (Fixing local laptop bug)
             }}
           />
           <Stack.Screen
@@ -48,11 +40,7 @@ export default function RootLayout() {
               gestureDirection: 'vertical',
               headerShown: false,
               animationDuration: 400,
-<<<<<<< HEAD
-              presentation: 'modal',
-=======
               presentation: 'cardModal',
->>>>>>> be28b31 (Fixing local laptop bug)
               animation: 'slide_from_bottom',
               animationTypeForReplace: 'push'
             }}
@@ -66,11 +54,6 @@ export default function RootLayout() {
               animationDuration: 400,
               presentation: 'modal',
               animation: 'slide_from_bottom',
-<<<<<<< HEAD
-              animationTypeForReplace: 'push'
-            }}
-          />
-=======
               animationTypeForReplace: 'push',
             }}
           />
@@ -110,7 +93,6 @@ export default function RootLayout() {
               animationTypeForReplace: 'push',
             }}
           />
->>>>>>> be28b31 (Fixing local laptop bug)
         </Stack>
       </GlobalProvider>
     </>

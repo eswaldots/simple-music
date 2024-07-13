@@ -15,11 +15,8 @@ export const GlobalSong = createContext({
   setPercent: () => {},
   total: 0,
   setTotal: () => {},
-<<<<<<< HEAD
-=======
   isFinished: false,
   setIsFinished: () => {},
->>>>>>> be28b31 (Fixing local laptop bug)
 });
 export const GlobalProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -29,10 +26,7 @@ export const GlobalProvider = ({ children }) => {
   const [mp3, setMp3] = useState("");
   const [percent, setPercent] = useState(0);
   const [total, setTotal] = useState(0);
-<<<<<<< HEAD
-=======
   const [isFinished, setIsFinished] = useState(false);
->>>>>>> be28b31 (Fixing local laptop bug)
   return (
     <GlobalSong.Provider
       value={{
@@ -47,13 +41,9 @@ export const GlobalProvider = ({ children }) => {
         setPercent,
         setTotal,
         idSong,
-<<<<<<< HEAD
-        setIdSong
-=======
         setIdSong,
         isFinished,
         setIsFinished
->>>>>>> be28b31 (Fixing local laptop bug)
       }}
     >
       {children}
