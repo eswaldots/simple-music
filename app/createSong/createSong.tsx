@@ -1,11 +1,35 @@
 import { View, Text, TextInput, Image, Dimensions, TouchableOpacity, ScrollView, SafeAreaView,FlatList   } from "react-native";
 import * as imagePicker from 'expo-image-picker';
+import * as DocumentPicker from "expo-document-picker";
 import {useState} from 'react';
 import Svg, { Path } from "react-native-svg"
+import { Alert } from "react-native";
+import { Tracks } from '../assets/Tracks';
+import {useContext} from 'react';
 export default function createSong() {
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
     const [image, setImage] = useState(null);
+    const [mp3, setMp3] = useState(null);
+    const pickFile = async () => {
+        const result = await DocumentPicker.getDocumentAsync({});
+        if (!result.canceled) {
+            setMp3(JSON.stringify(result.assets[0].uri));
+        }
+        else if (!result.success){
+            Alert('No file selected', "No file selected");
+        }
+    }
+    if (mp3) {
+        console.log('saving')
+    Tracks.push({
+    id: 3,
+    name: 'Melee main theme',
+    artist: 'The counsouls',
+    img: image,
+    mp3: mp3
+})}
+    const setTracks = useContext(Tracks);
     const pickImage = async () => {
     let result = await imagePicker.launchImageLibraryAsync({
       mediaTypes: imagePicker.MediaTypeOptions.All,
@@ -41,8 +65,7 @@ export default function createSong() {
       d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm2.25-2.25h.008v.008h-.008V10.5Z"
     />
   </Svg>
-)
-    }
+);    }
     return (
         <ScrollView automaticallyAdjustKeyboardInsets={true} contentContainerStyle={{
             flexGrow: 1,
@@ -73,7 +96,7 @@ export default function createSong() {
                 width: width * 0.75,
             }} placeholder='Enter an artist' ></TextInput>
             </View>
-            <TouchableOpacity className='bg-black w-40 rounded-full items-center justify-center h-12'>
+            <TouchableOpacity onPress={pickFile} className='bg-black w-40 rounded-full items-center justify-center h-12'>
             <Text className='text-white font-bold'>Add</Text>
             </TouchableOpacity>     
             </ScrollView>

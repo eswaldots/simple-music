@@ -1,7 +1,7 @@
 import { Link, Redirect, useRouter } from "expo-router";
 import { Tracks } from "./assets/Tracks"
 import { Image, View, Text, TouchableOpacity, Button} from "react-native"
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./global.css"
 import Float from "./Float";
 import { colorScheme, useColorScheme } from "nativewind";
@@ -13,12 +13,16 @@ export default function Index() {
     const router = useRouter()
     // Redirigiendo a los usuarios al reproductor ([id])
     // Inicializando la importación
+    useEffect(() => {
+    }, [Tracks])
     const Songs = (Tracks)
     const [here, setHere] = useState(0);
     // Mappeandola
-    const Song = Tracks.find(Track => Track.id === idSong)
+    const Song = Songs.find(Track => Track.id === idSong)
     return (
-        <View className='p-5 py-10 flex-1 flex flex-col max-w-screen max-h-screen bg-white dark:bg-gray-800 dark:text-white'>
+        <View style={{
+            color: 'white'
+        }} className='p-5 py-10 flex-1 flex flex-col max-w-screen max-h-screen bg-white dark:text-white'>
             <Text className='font-bold text-3xl mb-5'>Featured Songs</Text>
             <TouchableOpacity onPress={() => router.push('createSong/createSong')} className='mb-5'>
             <View className='flex flex-row items-center gap-5 m-2'>

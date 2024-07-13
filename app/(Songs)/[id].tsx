@@ -12,7 +12,7 @@ import { colorScheme, useColorScheme } from "nativewind";
 colorScheme.set("dark");
 export default function Index({}) {
   // Canciones desde el archivo de assets
-  const Songs = Tracks;
+  const Songs = useContext(Tracks);
   const router = useRouter();
   const actualLink = useLocalSearchParams()
   const [id, setID] = useState(Number(actualLink.id));

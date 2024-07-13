@@ -1,3 +1,4 @@
+import { createContext } from 'react';
 export const Tracks = [{
     id: 0,
     name: 'High and Dry',
@@ -18,4 +19,5 @@ export const Tracks = [{
     artist: 'The counsouls',
     img: require('./melee.jpeg'),
     mp3: require('./melee.mp3')
-}]
+},
+]
