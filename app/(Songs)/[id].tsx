@@ -8,6 +8,8 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { Tracks } from "../assets/Tracks";
 import { GlobalSong } from "../Hooks/actualSong";
 import { loadAsync } from "expo-font";
+import { colorScheme, useColorScheme } from "nativewind";
+colorScheme.set("dark");
 export default function Index({}) {
   // Canciones desde el archivo de assets
   const Songs = Tracks;
@@ -106,7 +108,7 @@ export default function Index({}) {
     }
     return (
       <>
-        <View className="flex flex-col flex-1 m-8 gap-5 justify-center items-stretch">
+        <View className="flex flex-col flex-1 m-8 gap-5 justify-center items-stretch dark:bg-black">
           <View className="flex flex-row flex-1 max-w-screen max-h-5 justify-center mt-4">
             <TouchableOpacity className="flex flex-row flex-1 max-h-2 shadow-2xl max-w-20 bg-black rounded-xl"></TouchableOpacity>
           </View>
