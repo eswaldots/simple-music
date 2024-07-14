@@ -1,11 +1,9 @@
-import { View, Image, Text, TouchableOpacity, Button } from "react-native";
-import Controls from "./assets/Controls";
-import Svg, { Path, G, Circle, Defs, Rect } from "react-native-svg";
+import { View, Image, Text, TouchableOpacity } from "react-native";
+import Svg, {Path} from "react-native-svg";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Audio } from "expo-av";
 import { useRouter } from "expo-router";
 import { GlobalSong } from "./Hooks/actualSong";
-import { playSound, pauseSound } from "./Hooks/actions";
 // Componente de play
 function Play(props) {
   return (
@@ -36,6 +34,7 @@ function Pause(props) {
 }
 export default function Float({here, id = null, name, artist, img, mp3 }) {
   const { percent, setPercent } = useContext(GlobalSong);
+    const { isPlaying, setIsPlaying } = useContext(GlobalSong);
   const { total, setTotal } = useContext(GlobalSong);
   const router = useRouter();
   // Define el sonido actual
@@ -45,9 +44,16 @@ export default function Float({here, id = null, name, artist, img, mp3 }) {
   // No ejecutar el useEffect al principio de la aplicación
   const firstRender = useRef(true);
   // Reproduce el sonido
+    const [file, setFile] = useState('')
+    useEffect(() => {
+        if (mp3) {
+            console.log(mp3);
+        setFile(mp3)}
+    }, [mp3]);
   async function playSound() {
     console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(mp3, {
+      console.log("File to play:", file);
+      const { sound } = await Audio.Sound.createAsync({ uri: file }, {
       shouldPlay: isPlaying,
       positionMillis: rate || 0,
     });
@@ -87,23 +93,22 @@ export default function Float({here, id = null, name, artist, img, mp3 }) {
       quitSound();
       playSound();}
   }, [here]);
-  const { isPlaying, setIsPlaying } = useContext(GlobalSong);
   const changeState = () => {
     isPlaying
       ? (setIsPlaying(false), pauseSound())
       : (setIsPlaying(true), playSound(rate));
   };
   return (
-    <View className="absolute bottom-0 my-auto mx-auto left-0 right-0 bg-opacity-60 px-[25px] py-5 gap-5 bg-slate-100 flex flex-1 max-h-42  flex-row max-w-screen items-center">
-      <View className="size-16 rounded-xl bg-slate-200">
-        <Image className="size-16 rounded-xl" source={img} />
+    <View className="absolute bottom-0 my-auto mx-auto left-0 right-0 px-[25px] py-5 bg-slate-200 gap-5 flex flex-1 max-h-48 flex-row max-w-screen items-center">
+      <View className="container max-w-20 rounded-xl bg-black">
+          <Image source={{uri: img}} className='max-w-20 h-20 bg-slate-300 rounded-xl'/>
       </View>
       <TouchableOpacity
         onPress={() => router.push(`(Songs)/${id}`)}
         classname="flex flex-col"
       >
-        <Text className="text-xl font-medium">{name}</Text>
-        <Text className="opacity-40 text-md font-normal">{artist}</Text>
+        <Text className="text-2xl font-medium">{name}</Text>
+        <Text className="opacity-40 text-xl text-md font-light">{artist}</Text>
       </TouchableOpacity>
       <View className="flex flex-col flex-1 max-h-20 items-end">
         <TouchableOpacity onPress={changeState}>

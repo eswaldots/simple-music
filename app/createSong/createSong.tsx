@@ -1,21 +1,50 @@
-import { View, Text, TextInput, Image, Dimensions, TouchableOpacity, ScrollView, SafeAreaView,FlatList   } from "react-native";
+import { View, Text, TextInput, Image, Dimensions, TouchableOpacity, ScrollView} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as imagePicker from 'expo-image-picker';
-import {useState} from 'react';
+import * as documentPicker from 'expo-document-picker'
+import {useContext, useEffect, useId, useState} from 'react';
 import Svg, { Path } from "react-native-svg"
+import {useRouter, useNavigation} from "expo-router";
+import {GlobalSong} from "@/app/Hooks/actualSong";
+import {Tracks} from "@/app/assets/Tracks";
+import * as Updates from 'expo-updates'
 export default function createSong() {
+    const [title, setTitle] = useState('')
+    const router = useRouter();
+    const navigation = useNavigation()
+    const [artist, setArtist] = useState('')
+    const globalIds = Tracks.length + 1
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
     const [image, setImage] = useState(null);
     const pickImage = async () => {
-    let result = await imagePicker.launchImageLibraryAsync({
+    let result = await imagePicker.launchImageLibraryAsync(  {
       mediaTypes: imagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
         if (!result.canceled) {
-      setImage(result.assets[0].uri);
+            setImage(result.assets[0].uri);
+        }
     }
+    const pickFile = async () => {
+        const result = await documentPicker.getDocumentAsync({type: 'audio/*', copyToCacheDirectory: true});
+        if (!result.canceled) {
+        const response = result.assets[0].uri
+            const Track = {id: globalIds, name: title, artist:artist, img: image, mp3: response }
+            const string = JSON.stringify(Track)
+        await AsyncStorage.setItem(String(globalIds), string);
+        console.log(globalIds);
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'assets/Tracks' }],
+        })
+            await Updates.reloadAsync()
+        }
+        else {
+            alert('No file selected');
+        }
     }
     function Camera(props) {
         return (
@@ -43,6 +72,7 @@ export default function createSong() {
   </Svg>
 )
     }
+    console.log(artist)
     return (
         <ScrollView automaticallyAdjustKeyboardInsets={true} contentContainerStyle={{
             flexGrow: 1,
@@ -52,11 +82,12 @@ export default function createSong() {
         <Text className='font-bold text-3xl'>Add a new song</Text>
         <View  className='container bg-gray-200 flex-1 max-h-96 items-center justify-center max-w-80 rounded-xl'>
            {image && <Image source={{uri: image}} className='flex container flex-1 w-full h-full rounded-xl' resizeMode="cover"/>}
-           <TouchableOpacity onPress={pickImage} className='absolute rounded-full h-20 w-20 bg-black opacity-70 items-center justify-center'><Camera/></TouchableOpacity
-           >
+           <TouchableOpacity onPress={pickImage} className='absolute rounded-full h-20 w-20 bg-black opacity-70 items-center justify-center'>
+               <Camera />
+           </TouchableOpacity>
         </View>
             <View className='gap-5'>
-            <TextInput style={{
+            <TextInput onChangeText={e => setTitle(e)} defaultValue={title} style={{
                 backgroundColor: 'white',
                 borderWidth: 1,
                 borderColor: 'lightgray',
@@ -64,7 +95,7 @@ export default function createSong() {
                 padding: 12,
                 width: width * 0.75,
             }} placeholder='Enter a title'></TextInput>
-            <TextInput style={{
+            <TextInput  onChangeText={e => setArtist(e)} defaultValue={artist} style={{
                 backgroundColor: 'white',
                 borderWidth: 1,
                 borderColor: 'lightgray',
@@ -73,7 +104,7 @@ export default function createSong() {
                 width: width * 0.75,
             }} placeholder='Enter an artist' ></TextInput>
             </View>
-            <TouchableOpacity className='bg-black w-40 rounded-full items-center justify-center h-12'>
+            <TouchableOpacity onPress={pickFile} className='bg-black w-40 rounded-full items-center justify-center h-12'>
             <Text className='text-white font-bold'>Add</Text>
             </TouchableOpacity>     
             </ScrollView>

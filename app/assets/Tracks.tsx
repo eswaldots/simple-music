@@ -1,21 +1,23 @@
-export const Tracks = [{
-    id: 0,
-    name: 'High and Dry',
-    artist: 'Radiohead',
-    img: require('./bends.png'),
-    mp3: require('./high.mp3')
-},
-{
-    id: 1,
-    name: 'Megalovania',
-    artist: 'Undertale',
-    img: require('./mega.png'),
-    mp3: require('./mega.mp3')
-},
-{
-    id: 2,
-    name: 'Melee main theme',
-    artist: 'The counsouls',
-    img: require('./melee.jpeg'),
-    mp3: require('./melee.mp3')
-}]
+import AsyncStorage from "@react-native-async-storage/async-storage";
+export const Tracks= [
+   {
+       id: 0,
+        name: String,
+        artist: String,
+        img: String,
+        mp3: './melee.mp3'
+    },
+]
+const getData = async() => {
+    const k = await AsyncStorage.getAllKeys();
+    const vals = await AsyncStorage.multiGet(k);
+    const log = JSON.parse(vals[0][1])
+for(const i  in vals) {
+    Tracks.push(JSON.parse(vals[i][1]))
+}}
+getData();
+export default function Redirect()  {
+    return (
+        <Redirect href='index' />
+    )
+}

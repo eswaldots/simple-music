@@ -1,5 +1,4 @@
 import { View, Text, Image } from "react-native";
-import Svg, { Path } from "react-native-svg"
 // Informacion de la cancion actual
 export default function Info({title = "High and Dry", artist='Radiohead', img}) {
     return  (
@@ -13,7 +12,7 @@ export default function Info({title = "High and Dry", artist='Radiohead', img}) 
         zIndex:999,  
       }  
   }} className='container shadow- shadow-gray-400 bg-gray-300 flex-1 max-h-full max-w-full rounded-xl'>
-            <Image source={img} className='flex container flex-1 w-full h-full rounded-xl' resizeMode="cover"/>
+            <Image source={{uri: img}} className='flex container flex-1 w-full h-full rounded-xl' resizeMode="cover"/>
         </View>
         <View className='text-center flex-col items-center'>
         <Text className='text-3xl font-bold flex-5'>{title}</Text>

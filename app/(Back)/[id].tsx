@@ -31,7 +31,7 @@ export default function Index({}) {
     // Reproduce la cancion
     async function playSound() {
       console.log("Loading Sound");
-      const { sound } = await Audio.Sound.createAsync(mp3, {
+      const { sound } = await Audio.Sound.createAsync({uri:mp3}, {
         positionMillis: rate || 0,
         shouldPlay: isPlaying,
       });

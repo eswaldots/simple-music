@@ -5,6 +5,7 @@ import Svg, { Path, G, Circle, Defs, Rect } from "react-native-svg";
 import { Slider } from "@react-native-assets/slider";
 import { GlobalSong } from "../Hooks/actualSong";
 import {useRouter} from "expo-router"
+import {Tracks} from "@/app/assets/Tracks";
 // Svg de los iconos del reproductor
 function Play(props) {
   return (
@@ -89,13 +90,13 @@ export default function Controls({ total, percent, PlaySong, PauseSong, QuitSong
   const NextSound = () => {
       QuitSong();
       console.warn(idSong);
-      idSong + 1 < 3 ? router.replace(`(Next)/${idSong + 1}`) :
-      router.replace(`(Next)/${0}`);
+      idSong + 1 < Tracks.length + 1   ? router.replace(`(Next)/${idSong + 1}`) :
+      router.replace(`(Next)/${2}`);
   }
   const BackSound = () => {
     QuitSong();
       console.warn(idSong);
-      idSong - 1 === -1 ? router.replace(`(Back)/${2}`) :
+      idSong - 1 === 1 ? router.replace(`(Back)/${Tracks.length}`) :
       router.replace(`(Back)/${idSong - 1}`);
   }
   //percent >= total -13 && (NextSound());

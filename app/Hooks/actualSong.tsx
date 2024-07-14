@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { Audio } from "expo-av";
 export const GlobalSong = createContext({
+    globalIds: 1,
+    setGlobalIds: () => {},
   idSong: 0,
   setIdSong: () => {},
   isPlaying: false,
@@ -27,6 +29,7 @@ export const GlobalProvider = ({ children }) => {
   const [percent, setPercent] = useState(0);
   const [total, setTotal] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [globalIds, setGlobalIds] = useState(1);
   return (
     <GlobalSong.Provider
       value={{
@@ -43,7 +46,9 @@ export const GlobalProvider = ({ children }) => {
         idSong,
         setIdSong,
         isFinished,
-        setIsFinished
+        setIsFinished,
+          globalIds,
+          setGlobalIds,
       }}
     >
       {children}

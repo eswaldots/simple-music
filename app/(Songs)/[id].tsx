@@ -1,5 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import Menu from "../Menu";
+import { TouchableOpacity, View } from "react-native";
 import Info from "../assets/Info";
 import Controls from "../assets/Controls";
 import { Audio } from "expo-av";
@@ -7,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Tracks } from "../assets/Tracks";
 import { GlobalSong } from "../Hooks/actualSong";
-import { loadAsync } from "expo-font";
 export default function Index({}) {
   // Canciones desde el archivo de assets
   const Songs = Tracks;
@@ -30,7 +28,7 @@ export default function Index({}) {
     // Reproduce la cancion
     async function playSound() {
       console.log("Loading Sound");
-      const { sound } = await Audio.Sound.createAsync(mp3, {
+      const { sound } = await Audio.Sound.createAsync({uri:mp3}, {
         positionMillis: rate || 0,
         shouldPlay: isPlaying,
       });
@@ -62,13 +60,13 @@ export default function Index({}) {
     async function nextSound() {
       quitSound()
       setNextId(id + 1);
-      nextId < 3 ? (setID(nextId)) : (setID(0))
+      nextId === Songs.length + 1  ? (setID(1)) : (setID(nextId))
       setIdSong(id)
     }
     async function backSound() {
       quitSound()
       setNextId(id);
-      nextId - 1 === -1 ? (setID(2)) : (setID(nextId-1))
+      nextId - 1 === 0 ? (setID(Songs.length + 1)) : (setID(nextId -1))
     }
     // Ni idea
     useEffect(() => {

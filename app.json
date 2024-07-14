@@ -8,12 +8,13 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./app/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F1F5F9"
     },
     "ios": {
       "infoPlist": {
+        "NSDocumentsUsageDescription": "This app needs access to your documents to play audio files.",
         "UIBackgroundModes": [
           "audio"
         ]
@@ -39,7 +40,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-av"
+      "expo-av",
+      "expo-image-picker"
     ],
     "experiments": {
       "typedRoutes": true
